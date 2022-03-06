@@ -1,4 +1,11 @@
+
+
+import React from 'react'
+
+import { theme } from '../src/styles/theme'
+
 export const parameters = {
+  chakra: { theme: theme },
   actions: { argTypesRegex: "^on[A-Z].*" },
   controls: {
     matchers: {
@@ -8,13 +15,3 @@ export const parameters = {
   },
 }
 
-import React from 'react'
-import {addDecorator} from '@storybook/react'
-import {ThemeProvider, CSSReset} from '@chakra-ui/core'
-
-addDecorator((storyFn) => (
-  <ThemeProvider>
-    <CSSReset />
-    {storyFn()}
-  </ThemeProvider>
-))
