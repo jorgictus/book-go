@@ -26,7 +26,7 @@ export default function ListPageBooks() {
     dispatch(changePage({ currentPage: pageNumber }));
     dispatch(
       getBooks({
-        filters: { ...query, startIndex: pageNumber * 10, maxResults: 10 },
+        filters: { ...query, startIndex: pageNumber * 10 - 12 , maxResults: 12 },
         authToken: session.accessToken,
       })
     );
@@ -54,7 +54,7 @@ export default function ListPageBooks() {
         flexDirection="column"
         maxWidth={1200}
         mx="auto"
-        px="6"
+        px={["0","6"]}
       >
         <ScaleFade initialScale={0.9} in={!isLoading}>
           <Flex

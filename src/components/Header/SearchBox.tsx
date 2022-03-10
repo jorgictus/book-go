@@ -25,7 +25,7 @@ export const SearchBox = ({
     clearData();
     changeFilter(values);
     getBooks({
-      filters: { ...values },
+      filters: { ...values, startIndex: 1, maxResults: 12 },
       authToken: session.accessToken,
     });
 

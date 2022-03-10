@@ -16,6 +16,7 @@ const store = configureStore({
   reducer: appReducer,
 });
 
+// Tipagens a serem usadas pelos hooks
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;
 export type AppThunk<ReturnType = void> = ThunkAction<

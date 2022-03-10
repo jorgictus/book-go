@@ -8,7 +8,7 @@ import Books, {
 
 describe("Books reducer", () => {
   it("should change Filter", () => {
-    const data = { q: "any book to search", startIndex: 1, maxResults: 10 };
+    const data = { q: "any book to search", startIndex: 0, maxResults: 12 };
     const action = changeFilter(data);
     expect(Books(initialState, action)).toEqual({
       ...initialState,

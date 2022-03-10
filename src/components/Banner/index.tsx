@@ -2,7 +2,7 @@ import { Flex, Text, Image } from "@chakra-ui/react";
 
 export const Banner = () => {
   return (
-    <Flex data-testid="Banner" w="100%" bg="gray.800" justify="space-between" borderRadius="xl">
+    <Flex data-testid="Banner" flexDirection={['column', 'row']} w="100%" bg="gray.800" justify="space-between" borderRadius="xl">
       <Text
         fontSize={["2xl", "5xl"]}
         fontWeight="bold"

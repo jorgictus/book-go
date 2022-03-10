@@ -1,6 +1,6 @@
 import { Stack } from "@chakra-ui/react";
 import { PaginationItem } from "./PaginationItem";
-import { usePagination, DOTS } from "../../hooks/usePagination";
+import { usePagination } from "../../hooks/usePagination";
 
 export interface PaginationProps {
   onPageChange: (pageNumber: number) => void;
@@ -13,7 +13,7 @@ export interface PaginationProps {
 export const Pagination = ({
   onPageChange,
   totalCount,
-  siblingCount = 3,
+  siblingCount = 2,
   currentPage,
   pageSize,
 }: PaginationProps) => {
@@ -32,12 +32,11 @@ export const Pagination = ({
       my="8"
       justify="space-between"
       align="center"
+
     >
       <Stack direction="row" spacing="2">
         {paginationRange.map((pageNumber) => {
-          pageNumber === DOTS && (
-            <PaginationItem key={pageNumber} number={pageNumber} />
-          );
+     
           return (
             <PaginationItem
               key={pageNumber}
