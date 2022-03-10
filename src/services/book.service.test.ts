@@ -12,7 +12,7 @@ describe("GetBook Service", () => {
   const mockFilters = {
     q: "Homem aranha",
     startIndex: 1,
-    maxResults: 10,
+    maxResults: 12,
   };
 
   it("should call getBook()", async () => {

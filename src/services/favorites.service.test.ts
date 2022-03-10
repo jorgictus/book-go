@@ -16,7 +16,7 @@ describe("Favorites Services", () => {
   it("should call getFavoriteBook()", async () => {
     axios.get.mockResolvedValueOnce({ status: 200 });
 
-    const params = { startIndex: 1, maxResults: 10 };
+    const params = { startIndex: 0, maxResults: 12 };
     await getFavoriteBook(params, "token");
 
     expect(axios.get).toHaveBeenCalledWith(

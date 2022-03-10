@@ -27,7 +27,7 @@ export function Header() {
       w="100%"
       maxWidth={1200}
       as="header"
-      h="20"
+      h={["40", "20"]}
       mx="auto"
       mt="4"
       px="6"
@@ -44,16 +44,14 @@ export function Header() {
           getBooks={(values) =>
             dispatch(
               BooksSlice.getBooks({
-                ...values,
-                startIndex: currentPage * 10,
-                maxResults: 10,
+                ...values
               })
             )
           }
         />
       )}
 
-      <Flex align="center" ml="auto">
+      <Flex align="center" mt={["2", "0"]} ml={["0","auto"]}>
         {session && (
           <Profile
             showProfileData={isWideVersion}

@@ -103,7 +103,7 @@ export default function BookDetails() {
                 <Image
                   alt="Logo"
                   fallback={<Skeleton />}
-                  src={bookData?.volumeInfo.imageLinks.extraLarge}
+                  src={bookData?.volumeInfo.imageLinks.thumbnail}
                 />
               </AspectRatio>
             </Box>
@@ -129,7 +129,9 @@ export default function BookDetails() {
                 ))}
               </Box>
               <Text color="gray.300" mt="4">
-                {bookData?.volumeInfo.description}
+              <div dangerouslySetInnerHTML={{__html:bookData?.volumeInfo.description}}></div>
+
+              
               </Text>
             </Flex>
           </Flex>
