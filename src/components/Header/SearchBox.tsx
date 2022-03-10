@@ -1,28 +1,41 @@
-import {
-  Flex,
-  Icon,
-  Input,
-  FormControl,
-  FormErrorMessage,
-  IconButton,
-} from "@chakra-ui/react";
+import { Flex, Icon, Input, FormControl, IconButton } from "@chakra-ui/react";
 import { RiSearchLine } from "react-icons/ri";
-import intl from "react-intl-universal";
 import { useForm } from "react-hook-form";
 import router from "next/router";
+import { useSession } from "next-auth/react";
+export interface SearchBoxProps {
+  changeFilter: (filter) => void;
+  clearData: () => void;
+  getBooks: (filter) => void;
+}
 
-export const SearchBox = () => {
+export const SearchBox = ({
+  changeFilter,
+  clearData,
+  getBooks,
+}: SearchBoxProps) => {
   const {
     handleSubmit,
     register,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = useForm();
+  const { data: session } = useSession();
 
   function onSubmit(values) {
-    router.push({
-      pathname: "/books",
-      query: { ...values },
+    clearData();
+    changeFilter(values);
+    getBooks({
+      filters: { ...values },
+      authToken: session.accessToken,
     });
+
+    router.push(
+      {
+        pathname: "/books",
+      },
+      undefined,
+      { shallow: true }
+    );
   }
 
   return (
@@ -33,8 +46,7 @@ export const SearchBox = () => {
           flex="1"
           py="4"
           px="8"
-          ml="6"
-          maxWidth={400}
+          maxWidth={800}
           alignSelf="center"
           color="gray.200"
           position="relative"
@@ -43,10 +55,11 @@ export const SearchBox = () => {
         >
           <Input
             role="SearchInput"
+            autoComplete="off"
             id="q"
             color="gray.50"
             variant="unstyled"
-            placeholder={intl.get("searchOnThePlatform")}
+            placeholder="Search by author, title, name"
             _placeholder={{ color: "gray.400" }}
             px="4"
             mr="4"

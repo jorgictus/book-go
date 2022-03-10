@@ -1,0 +1,37 @@
+import { Button, ButtonProps as ChakraButtonProps } from "@chakra-ui/react";
+
+interface PaginationItemProps extends ChakraButtonProps {
+  isCurrent?: boolean;
+  number: number;
+}
+
+export const PaginationItem = ({
+  isCurrent = false,
+  number,
+  ...rest
+}: PaginationItemProps) => {
+  return isCurrent ? (
+    <Button
+      size="sm"
+      fontSize="xs"
+      w="4"
+      colorScheme="blue"
+      disabled
+      _disabled={{ bg: "blue.500", cursor: "default" }}
+      {...rest}
+    >
+      {number}
+    </Button>
+  ) : (
+    <Button
+      size="sm"
+      fontSize="xs"
+      w="4"
+      bg="gray.700"
+      _hover={{ bg: "gray.500" }}
+      {...rest}
+    >
+      {number}
+    </Button>
+  );
+};

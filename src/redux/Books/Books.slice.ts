@@ -1,34 +1,59 @@
 import {
-  createSlice, isPending, isFulfilled, isRejected,
-} from '@reduxjs/toolkit';
+  createSlice,
+  isPending,
+  isFulfilled,
+  isRejected,
+} from "@reduxjs/toolkit";
 
-import { getBooks } from './Books.actions';
+import { getBooks, getBookByVolumeId } from "./Books.actions";
 
-export interface  FiltersTypes {
-  q : string
+export interface filtersProps {
+  q: string;
+  startIndex?: number;
+  maxResults?: number;
 }
-
 interface InitalState {
-  filters: any;
+  data: any;
+  filters: filtersProps;
   isLoading: boolean;
-  data : any;
+  pagination: any;
+  bookData: any;
 }
 
-const filtersDefault = {
-  q : ""
-}
 export const initialState: InitalState = {
-  filters: filtersDefault,
-  isLoading: false,
   data: null,
+  bookData: null,
+  isLoading: true,
+  pagination: {
+    currentPage: 1,
+  },
+  filters: {
+    q: "",
+    startIndex: 1,
+    maxResults: 10,
+  },
 };
 
 const Books = createSlice({
-  name: 'getBooks',
+  name: "getBooks",
   initialState,
   reducers: {
     changeFilter: (state, action) => {
       state.filters = { ...state.filters, ...action.payload };
+    },
+    clearData: (state) => {
+      state.isLoading = true;
+      state.data = initialState.data;
+      state.pagination = {
+        currentPage: 1,
+      };
+    },
+    clearBookData: (state) => {
+     
+      state.bookData = initialState.bookData;
+    },
+    changePage: (state, action) => {
+      state.pagination = { ...state.pagination, ...action.payload };
     },
   },
   extraReducers: (builder) => {
@@ -42,13 +67,23 @@ const Books = createSlice({
     builder.addMatcher(isRejected(getBooks), (state) => {
       state.isLoading = false;
     });
+
+    builder.addMatcher(isPending(getBookByVolumeId), (state) => {
+      state.isLoading = true;
+    });
+    builder.addMatcher(isFulfilled(getBookByVolumeId), (state, action) => {
+      state.bookData = action.payload;
+      state.isLoading = false;
+    });
+    builder.addMatcher(isRejected(getBookByVolumeId), (state) => {
+      state.isLoading = false;
+    });
   },
 });
 
-export const {
-  changeFilter,
-} = Books.actions;
+export const { changeFilter, changePage, clearData, clearBookData } =
+  Books.actions;
 
-export { getBooks };
+export { getBooks, getBookByVolumeId };
 
 export default Books.reducer;
