@@ -26,7 +26,7 @@ export default function Home() {
     if (status === "authenticated") {
       dispatch(
         FavoritesSlice.getFavoriteBook({
-          filters: { startIndex: 1, maxResults: 10 },
+          filters: { startIndex: 0, maxResults: 12 },
           authToken: session.accessToken,
         })
       );
@@ -47,7 +47,7 @@ export default function Home() {
     console.log(pageNumber);
     dispatch(
       FavoritesSlice.getFavoriteBook({
-        filters: { startIndex:( pageNumber * 10 - 10), maxResults: 10 },
+        filters: { startIndex: pageNumber * 10 - 12, maxResults: 12 },
         authToken: session.accessToken,
       })
     );
@@ -66,11 +66,11 @@ export default function Home() {
             flexDirection="column"
             maxWidth={1200}
             mx="auto"
-            px="6"
+            px={["0", "6"]}
           >
-            {data?.items.length > 0 ? (
+            {data?.items ? (
               <>
-                <Flex w="100%" flexWrap="wrap">
+                <Flex w="100%" justify={["center", "left"]} flexWrap="wrap">
                   {data?.items.map((book: BookCard) => (
                     <Link key={book.id} href={`/books/${book.id}`} passHref>
                       <a

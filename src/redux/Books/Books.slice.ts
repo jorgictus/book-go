@@ -29,8 +29,8 @@ export const initialState: InitalState = {
   },
   filters: {
     q: "",
-    startIndex: 1,
-    maxResults: 10,
+    startIndex: 0,
+    maxResults: 12,
   },
 };
 
