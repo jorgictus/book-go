@@ -2,8 +2,8 @@
 
  export const theme = extendTheme({
     fonts : {
-        heading: 'Roboto',
-        body: 'Roboto'
+        heading: 'Roboto, sans-serif',
+        body: 'Roboto, sans-serif'
     },
     styles: {
         global : {
